@@ -1,23 +1,23 @@
+% EXERCISE 2. Download some SPD from UFL collection
+% compare the number of non-zeros in Cholesky factors
+% using RCM and CM orderings.
+
 Problem = load('apache2.mat');
-% Problem = 
-% 
+% Problem =
+%
 %   struct with fields:
-% 
+%
 %       name: 'GHS_psdef/apache2'
 %      title: 'SPD matrix (finite difference 3D) from APACHE small'
-%          A: [715176¡Ñ715176 double]
+%          A: [715176ï¿½ï¿½715176 double]
 %         id: 1423
 %       date: '2006'
 %     author: ''
 %         ed: 'N. Gould, Y. Hu, J. Scott'
 %       kind: 'structural problem'
-     
+
 a = Problem.A;
 spy(a); % very, very banded, since it's too large matrix
-
-
-%% Exercise: download some SPD from UFL collection
-% compare the number of non-zeros in Cholesky factors using RCM/CM ordering
 
 p = symrcm(a);
 q = p(end:-1,1); % reverse ordering
