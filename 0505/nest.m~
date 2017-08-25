@@ -48,16 +48,13 @@ spy(a);
 figure;
 spy(a2); % looks like downward pointing arrows, good for reducing fill-in
 
-
 % compute a's cholesky factor 
-p = amd(a);
-r = chol(a(p, p));
-figure;
-spy(r);
+r = chol(a);
 nnz(r);
-
-% compute a2's cholesky factor 
-r2 = chol(a2);
 figure;
+
+spy(r);
+p = amd(a2);
+r2 = chol(a2(p, p));
 spy(r2);
-nnz(r2);
+% nnz(r2);
