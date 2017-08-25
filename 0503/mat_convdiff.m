@@ -1,9 +1,9 @@
 % m = 4;
 % beta = 0.7;
-% ax = mat_convdiff0503(m, beta);
+% ax = mat_convdiff(m, beta);
 % spy(ax);
 
-function a = mat_convdiff0503(m, beta)
+function a = mat_convdiff(m, beta)
 % a = mat_convdiff(m, beta)
 %   Create the finite-difference discretization matrix of a 
 %   2D convection-diffusion problem.  Central differences are used.  
