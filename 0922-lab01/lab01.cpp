@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <iostream>
 
+using namespace std;
+
 int main() {
     // Init
     // n is the length of two vectors.
@@ -19,6 +21,7 @@ int main() {
     for (int i = 0; i < n; i++) {
         x[i] = ((double) rand_r(&seed))/RAND_MAX;
         y[i] = ((double) rand_r(&seed))/RAND_MAX;
+	//cout << x[i] << "," << y[i] << endl;
     }
 
     // mkl: dot-product by cblas_ddot
