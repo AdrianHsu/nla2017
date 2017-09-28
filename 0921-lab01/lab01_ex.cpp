@@ -33,15 +33,23 @@ int main() {
     // Allocate memory in GPU by cudaMalloc
     std::cout << "Allocate device memory\n";
     // todo : allocate memory
+    cudaMalloc((void**) &dx, n*sizeof(double));
+    cudaMalloc((void**) &dy, n*sizeof(double));
 
     // Transfer data from CPU to GPU by cudaMemcpy
     std::cout << "Transfer data from CPU to GPU\n";
     // todo : transfer data
-
+    // cudaMemcpy( void* dst, const void* src, size_t count, cudaMemcpyKind)
+    cudaMemcpy(dx, x, n*sizeof(double), cudaMemcpyHostToDevice);
+    cudaMemcpy(dy, y, n*sizeof(double), cudaMemcpyHostToDevice);
     // Compute dot-product by cublasDdot
     std::cout << "Calculate dot-product\n";
     cublasHandle_t handle;
     // todo : create/destroy handle and use cublasDdot.
+    // cublasDdot( handle, int # of elements, const double* vector1, int stride between consecutive elements of vector1, vector2, stride for v2, double* result)
+    cublasCreate( &handle );
+    cublasDdot( handle, n, dx, 1, dy, 1, &cuda_ans );
+    cublasDestroy(handle);
     std::cout << "CUDA answer : " << cuda_ans << std::endl;
     std::cout << "===== DIFF =====\n";
     std::cout << "The diff of two ans: " << cuda_ans-mkl_ans << "\n";
