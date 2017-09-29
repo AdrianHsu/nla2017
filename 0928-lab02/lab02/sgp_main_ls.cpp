@@ -5,6 +5,9 @@
 /// @author  William Liao
 ///
 
+/// shift_sigma: line 74
+/// flag = 'H', 'D': line 101
+
 #include <cstdio>
 #include <cstdlib>
 #include <cassert>
@@ -68,7 +71,7 @@ int main( int argc, char** argv ){
     // Construct Laplacian
     int *csrRowIndA, *csrColIndA;
     double  *csrValA;
-    double shift_sigma = 0.5;
+    double shift_sigma = 0.8; // AH: 0.5 
     cout << "Construct Laplacian matrix of graph........." << flush;
     GraphLaplacian(&nnz, cooRowIndA, cooColIndA, cooValA, n, &csrRowIndA, &csrColIndA, &csrValA, shift_sigma);
     cout << " Done.  " << endl;
@@ -97,6 +100,11 @@ int main( int argc, char** argv ){
     x = new double[n];
     char flag = 'H';
     int solver = 0;
+    /*
+    0: LU (default)
+    1: Cholesky
+    2: QR
+    */
 
     cout << "Solving Linear System........." << flush;
 
