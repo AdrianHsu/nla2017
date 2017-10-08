@@ -17,7 +17,7 @@ function [x, iter] = sor(A, b, tol, w)
     end
 end
 
-% AH: another code, matrix point of view
+% AH: another code, matrix point of v
 % ref: https://www.mathworks.com/examples/matlab/community/22580-gauss-seidel-method
 % function [x, iter] = sor(A, b, tol, w)
 %     n = length(A); % if 40x40 -> n = 40

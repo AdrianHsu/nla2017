@@ -18,6 +18,6 @@ function [x, iter] = gaussseidel(A, b, tol)
             x(i) = (1/A(i,i)) * (b(i) - sum); 
         end
         iter = iter + 1;
-        normVal = norm(x - x0);
+        normVal = norm(x - x0, Inf) / norm(x, Inf);
     end
 end

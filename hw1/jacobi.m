@@ -18,7 +18,7 @@ function [x, iter] = jacobi(A, b, tol)
         end
         
         iter = iter + 1;
-        normVal = norm(x - x0);
+        normVal = norm(x - x0, Inf) / norm(x, Inf);
     end
 end
 % some self-study notes...
