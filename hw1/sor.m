@@ -4,11 +4,11 @@ function [x, iter] = sor(A, b, tol, w)
     D = diag(diag(A));
     L = tril(A) - D;
     U = triu(A) - D;
-    iter = 0;
     Tw =  (D+w*L) \ ((1 - w)*D - w*U);
     cw = w * ((D+w*L) \ b);
-
     normVal = Inf;
+    iter = 0;
+
     while normVal > tol
         x = Tw*x0 + cw;
         normVal = norm(x - x0, Inf) / norm(x, Inf);

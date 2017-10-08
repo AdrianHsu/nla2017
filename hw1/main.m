@@ -72,12 +72,12 @@ end
 % tol = 1e-3;
 
 % test2: this will cause sor() break down! when w > 1.0
-% A = [5 -2 3 0 6; -3 9 1 -2 7.4; 2 -1 -7 1 6.7; ...
-%     4 3 -5 7 9; 2 3.5 6.1 -4 -8.1];
-% b = [-1 2 3 0.5 3.1]';
-% tol = 1e-3; % for test only
+A = [5 -2 3 0 6; -3 9 1 -2 7.4; 2 -1 -7 1 6.7; ...
+    4 3 -5 7 9; 2 3.5 6.1 -4 -8.1];
+b = [-1 2 3 0.5 3.1]';
+tol = 1e-3; % for test only
 
 
 % [x, iter] = gaussseidel(A, b, tol);
-% [x, iter] = jacobi(A, b, tol);
+[x, iter] = jacobi(A, b, tol);
 % [x, iter] = sor(A, b, tol, 1.3);

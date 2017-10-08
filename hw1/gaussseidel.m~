@@ -1,25 +1,13 @@
-function [x, iter] = sor(A, b, tol, w)
-
+function [x, iter] = gaussseidel(A, b, tol)
+    
     x0 = zeros(length(b), 1);
     D = diag(diag(A));
     L = tril(A) - D;
-    U = triu(A) - D;
-    iter = 0;
-    Tw =  (D+w*L) \ ((1 - w)*D - w*U);
-    cw = w * ((D+w*L) \ b);
-
-    normVal = Inf;
-    while normVal > tol
-        x = Tw*x0 + cw;
-        normVal = norm(x - x0, Inf) / norm(x, Inf);
-        x0 = x;
-        iter = iter + 1;
-    end
+    U
 end
 
-% AH: another code, matrix point of v
 % ref: https://www.mathworks.com/examples/matlab/community/22580-gauss-seidel-method
-% function [x, iter] = sor(A, b, tol, w)
+% function [x, iter] = gaussseidel(A, b, tol)
 %     n = length(A); % if 40x40 -> n = 40
 %     x0 = zeros(length(b), 1);
 %     x = x0;
@@ -35,12 +23,9 @@ end
 %             for j=i+1:n
 %                 sum = sum + A(i, j) * x0(j);
 %             end
-%             x(i) = (w/A(i,i)) * (b(i) - sum);  % only diff from "w"
+%             x(i) = (1/A(i,i)) * (b(i) - sum); 
 %         end
 %         iter = iter + 1;
 %         normVal = norm(x - x0, Inf) / norm(x, Inf);
 %     end
 % end
-
-
-
