@@ -24,7 +24,6 @@ b = transpose([0 5 0 6 -2 6]);
 
 
 
-
 % start cg method
 x = zeros(length(b), 1);
 r = b - A*x;
