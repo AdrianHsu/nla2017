@@ -9,9 +9,9 @@ function [mu, x] = invpmethod(A, x, tol, N)
     while k <= N
         % solve for (A-qI)y = x
         y = (A-q*eye(n))\(x);
-        
         mu = y(index);
-        [~, index] = max(abs(y));
+
+        [, index] = max(abs(y));
 
         err = norm(x - (y./y(index)), Inf);
         x = y./y(index);
