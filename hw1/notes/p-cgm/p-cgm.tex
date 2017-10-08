@@ -1,0 +1,68 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\title{Preconditioned Conjugate Gradient Method}
+\begin{document}
+\maketitle{}
+Goal. To solve $A\mathbf{x} = \mathbf{b}$ given $C^{-1}$ and $x^{(0)}$
+\\
+\\
+\\
+Input. given that (number of equations) = (number of unknown variables) = $n$; n-by-n matrix A; n-by-1 vector \textbf{b}, n-by-n \textbf{preconditioning matrix} $C^{-1}$, n-by-1 initial approximation $\mathbf{x} = \mathbf{x}^{(0)}$, max number of iterations N, tolerance \textbf{TOL}.
+\\
+\\
+\\
+Output. the approximate solution $\mathbf{x}^{(n)} = (x_1, ... , x_n)^{t}$, and the residual vector $\mathbf{r}^{(n)} = (r_1, ... , r_n)^{t}$, or the message that the number of iterations was exceeded.
+\\
+\\
+\\
+Step 1. 
+\\
+$\mathbf{r} \gets \mathbf{b} - A\mathbf{x}$ (Compute $\mathbf{r}^{(0)}$, where $\mathbf{x} \gets \mathbf{x}^{(0)}$) \\
+$\mathbf{w} \gets C^{-1}\mathbf{r}$ \\
+$\mathbf{v} \gets C^{-t}\mathbf{w}$ \\
+$\alpha \gets \sum_{j=1}^{n} w_j^{2}$ \\
+\\
+Step 2. \\
+Set $k = 1$. \\
+\\
+Step 3. \\
+While $k \leq N$, do Steps 4 to 7. \\
+\\
+Step 4. 
+\\
+If $\|\mathbf{v}\| < \mathbf{TOL}$, then \textbf{STOP}. \\
+\\
+Step 5.
+\\
+$\mathbf{u} \gets A\mathbf{v}$ (Note: currently, $\mathbf{u} = A\mathbf{v}^{(k)}$) \\
+$t \gets \cfrac{\alpha}{\sum_{j=1}^{n}v_j u_j}$ \\
+$\mathbf{x} \gets \mathbf{x} + t\mathbf{v} $ \\
+$\mathbf{r} \gets \mathbf{r} - t\mathbf{u}$ \\
+$\mathbf{w} \gets C^{-1}\mathbf{r}$ \\
+$\beta \gets \sum_{j=1}^{n}w_j^2$ \\
+\\
+Step 6. 
+\\
+If $|\beta| < \mathbf{TOL}$, and $\|\mathbf{r}\| < \mathbf{TOL} $, then \textbf{STOP}.
+\\
+\\
+Step 7.
+\\
+$s \gets \beta/\alpha$ \\
+$\mathbf{v} \gets C^{-t}\mathbf{w} + s\mathbf{v}$ \\
+$\alpha \gets \beta$ (Update $\alpha$) \\
+$k \gets k + 1$\\
+\\
+Step 8.
+\\
+If $k > n$, then \textbf{STOP}. (\textit{The maximum number of iterations was exceeded.})
+\\
+
+
+
+
+\end{document}
