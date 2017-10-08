@@ -63,3 +63,12 @@ b = zeros(40, 1);
 for i = (1:40)
     b(i, 1) = 1.5 * i - 6;
 end
+
+% test
+A = [5 -2 3 0 6; -3 9 1 -2 7.4; 2 -1 -7 1 6.7; ...
+    4 3 -5 7 9; 2 3.5 6.1 -4 -8.1];
+b = [-1 2 3 0.5 3.1]';
+tol = 1e-3; % for test only
+% [x, iter] = gaussseidel(A, b, tol);
+% [x, iter] = jacobi(A, b, tol);
+[x, iter] = sor(A, b, tol, 1.25);

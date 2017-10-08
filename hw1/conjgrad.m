@@ -32,7 +32,7 @@ for k = (1:numel(b))
     x = x + t * v;
     r1 = r - t * A*v;
 %     display(norm(r1));
-    if norm(r1, Inf) < tol
+    if norm(r1 - r, Inf) < tol
 %         display(k);
         break;
     end
