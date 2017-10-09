@@ -28,9 +28,9 @@ x0 = [0 1 0 0]';
 
 
 % [mu, x] = pmethod(A, x0, tol, N);
-[mu, x] = invpmethod(A, x0, tol, N);
+% [mu, x] = invpmethod(A, x0, tol, N);
 
 % A4
 % tol = 1e-4;
 % N = 25;
-% [mu, x] = pmethod(A, x0, tol, N);
+[mu, x] = pmethod(A, x0, tol, N);
