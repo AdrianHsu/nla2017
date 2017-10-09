@@ -83,5 +83,5 @@ end
 
 % [x, iter] = jacobi(A, b, tol);
 % [x, iter] = gaussseidel(A, b, tol);
-% [x, iter] = sor(A, b, tol, 1.3);
-[x, iter] = preconjgrad(A, b, tol);
+[x, iter] = sor(A, b, tol, 1.1);
+% [x, iter] = preconjgrad(A, b, tol);
