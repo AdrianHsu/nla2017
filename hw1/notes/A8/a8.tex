@@ -16,6 +16,13 @@
 \textbf{a.} Show that an \textit{A}-orthogonal set of nonzero vectors associated with a positive definite matrix is linearly independent.
 \\
 \\
+\textit{pf.} prove by contradiction, suppose that any \textit{A}-orthogonal set $S = \{\mathbf{v}_1, \mathbf{v}_2...\mathbf{v}_n\}$ is linear dependent; that is, there exist a finite number of distinct vectors $V = \{\mathbf{v}_1, \mathbf{v}_2, ..., \mathbf{v}_k\}$ in $S$, $k < n$, and scalars $a_1, a_2, ..., a_k$ not all zero, such that $$ a_1 \mathbf{v}_1 + ... + a_k \mathbf{v}_k = 0$$ 
+If not all of the scalars are zero, then at least one is non-zero, WLOG, say $a_{1}$, in which case this equation can be written in the form $$\mathbf{v}_1 = -\cfrac{a_2}{a_1}\mathbf{v_2}-...-\cfrac{a_k}{a_1}\mathbf{v_k}$$
+Since that $$\mathbf{v}_1^{t}A\mathbf{v}_j = 0, j \neq 1$$and choose $\mathbf{v}_j$ which is in the set $V$, we get $$(-\cfrac{a_2}{a_1}\mathbf{v_2}-...-\cfrac{a_k}{a_1}\mathbf{v_k})^{t}A\mathbf{v}_j = 0$$ that is, $$\left((-\cfrac{a_2}{a_1}\mathbf{v_2})^{t}+...+(-\cfrac{a_k}{a_1}\mathbf{v_k})^{t}\right)A\mathbf{v}_j = 0$$ 
+by definition of A-orthogonal set, since that $$(-\cfrac{a_2}{a_1}\mathbf{v_l})^{t}A\mathbf{v}_j = 0$$ where $l = 2, 3, ...k$ except $j$, the equation can be reduced to $$(-\cfrac{a_j}{a_1}\mathbf{v_j})^{t}A\mathbf{v}_j = 0$$ remove the scalar, we get $$\mathbf{v_j}^{t}A\mathbf{v}_j = 0$$ but we know that $A$ is a positive definite matrix, i.e. $\mathbf{v}^{t}A\mathbf{v} > 0$ for all $\mathbf{v} \neq \mathbf{0}$, which causes a contradiction. $\Box$
+\\
+\\
+\\
 \textbf{b.} Show that if ${\mathbf{v}^{(l)}, \mathbf{v}^{(2)},... , \mathbf{v}^{(n)}}$ is a set of \textit{A}-orthogonal nonzero vectors in $\mathbb{R}$ and $\mathbf{z}^{t}\mathbf{v}^{(i)} = 0$, for each $i = 1,2,... ,n$, then $\mathbf{z} = \mathbf{0}$.
 
 
