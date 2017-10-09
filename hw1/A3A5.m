@@ -1,3 +1,6 @@
+% A3. example 9.3.5
+% A5. example 9.3.11
+
 tol = 1e-3;
 % problem set a.
 A = [2 1 1; 1 2 1; 1 1 2];
@@ -12,5 +15,8 @@ x0 = [1 -1 2]';
 % A = [4 1 1 1; 1 3 -1 1; 1 -1 2 0; 1 1 0 2];
 % x0 = [1 -2 0 3]';
 
+% for testing invpmethod
+% A = [-4 14 0; -5 13 0; -1 0 2];
+% x0 = [1 1 1]';
 
-[mu, x] = pmethod(A, x0, tol, 100000);
+% [mu, x] = invpmethod(A, x0, tol, 1000);

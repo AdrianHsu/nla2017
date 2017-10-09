@@ -1,3 +1,5 @@
+% A7. example 7.6.9
+
 tol = 1e-5;
 
 % problem set 1.
