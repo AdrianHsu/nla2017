@@ -13,7 +13,8 @@ function [x, iter] = preconjgrad(A, b, tol)
     k = 1;
     N = 1000000; % not used
     iter = 0;
-
+    fileID = fopen('precg-a7-c.txt','w');
+    fprintf(fileID,'%6s %12s %s \n','k','norm', 'x');
     % Step 3.
     while iter <= N
         % Step 4.
@@ -24,11 +25,15 @@ function [x, iter] = preconjgrad(A, b, tol)
         u = A*v;
         t = alpha/ sum(v.*u);
         x = x + t*v;
+        r0 = r;
         r = r - t*u;
         w = invC*r;
         beta = sumsqr(w);
         % Step 6.
-        if norm(beta, Inf) < tol && norm(r, Inf) < tol
+        normVal = norm(r , Inf);
+        fprintf(fileID, '%6.0f %12.6f (%s)\n',iter, normVal, strjoin(cellstr(num2str(x(:))),', '));
+
+        if norm(beta, Inf) < tol && norm(r , Inf) < tol
             break;
         end
         % Step 7.

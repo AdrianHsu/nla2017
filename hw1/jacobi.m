@@ -9,9 +9,13 @@ function [x, iter] = jacobi(A, b, tol)
     Cj = D\b;
     normVal = Inf;
     iter = 0;
+    fileID = fopen('jacobi-a7-c.txt','w');
+    fprintf(fileID,'%6s %12s %s \n','k','norm', 'x');
     while normVal > tol
         x = Tj*x0 + Cj;
         normVal = norm(x - x0, Inf) / norm(x, Inf);
+        fprintf(fileID, '%6.0f %12.6f (%s)\n',iter, normVal, strjoin(cellstr(num2str(x(:))),', '));
+
         x0 = x;
         iter = iter + 1;
     end

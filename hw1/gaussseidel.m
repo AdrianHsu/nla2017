@@ -8,9 +8,13 @@ function [x, iter] = gaussseidel(A, b, tol)
     Cg = L\b;
     normVal = Inf;
     iter = 0;
+    fileID = fopen('gaussseidel-a7-c.txt','w');
+    fprintf(fileID,'%6s %12s %s \n','k','norm', 'x');
     while normVal > tol
         x = Tg*x0 + Cg;
         normVal = norm(x - x0, Inf) / norm(x, Inf);
+        fprintf(fileID, '%6.0f %12.6f (%s)\n',iter, normVal, strjoin(cellstr(num2str(x(:))),', '));
+
         x0 = x;
         iter = iter + 1;
     end
