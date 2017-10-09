@@ -7,7 +7,7 @@ N = 3;
 % problem set a.
 A = [2 1 1; 1 2 1; 1 1 2];
 x0 = [1 -1 2]';
-% % problem set b.
+% problem set b.
 A = [1 1 1; 1 1 0; 1 0 1];
 x0 = [-1 0 1]';
 % problem set c.
@@ -22,12 +22,15 @@ x0 = [0 1 0 0]';
 % A = [4 -1 1; -1 3 -2; 1 -2 3];
 % x0 = [1 0 0]';
 
+% for testing invpmethod
+% A = [-4 14 0; -5 13 0; -1 0 2];
+% x0 = [1 1 1]';
 
 
 % [mu, x] = pmethod(A, x0, tol, N);
-% [mu, x] = sympmethod(A, x0, tol, N);
+[mu, x] = invpmethod(A, x0, tol, N);
 
 % A4
-tol = 1e-4;
-N = 25;
-[mu, x] = pmethod(A, x0, tol, N);
+% tol = 1e-4;
+% N = 25;
+% [mu, x] = pmethod(A, x0, tol, N);

@@ -1,7 +1,7 @@
 function [mu, x] = sympmethod(A, x, tol, N)
     k = 1;
     x = x/norm(x, 2);
-    fileID = fopen('sympmethod-test.txt','w');
+    fileID = fopen('sympmethod-a5-d.txt','w');
     fprintf(fileID,'%6s %12s %s \n','k','mu', 'x');
     while k <= N
         y = A*x;
