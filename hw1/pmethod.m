@@ -10,6 +10,9 @@ function [mu, x] = pmethod(A, x, tol, N)
 % Step 3.
     x = x/x(index);
 % Step 4.
+    fileID = fopen('pmethod-a4-d.txt','w');
+    fprintf(fileID,'%6s %12s %s \n','k','mu', 'x');
+
     while k <= N
         
         y = A*x; % Step 5.
@@ -28,6 +31,10 @@ function [mu, x] = pmethod(A, x, tol, N)
         if err < tol
             break;
         end
+        fprintf(fileID, '%6.0f %12.4f (%s)\n',k, mu, strjoin(cellstr(num2str(x(:))),', '));
         k = k + 1;
+        
     end
+    fclose(fileID);
+    
 end

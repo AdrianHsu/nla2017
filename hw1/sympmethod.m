@@ -1,11 +1,8 @@
-% A = [4 -1 1; -1 3 -2; 1 -2 3];
-% x0 = [1 0 0]';
-% N = 100000;
-% tol = 1e-3;
-
 function [mu, x] = sympmethod(A, x, tol, N)
     k = 1;
     x = x/norm(x, 2);
+    fileID = fopen('sympmethod-test.txt','w');
+    fprintf(fileID,'%6s %12s %s \n','k','mu', 'x');
     while k <= N
         y = A*x;
         mu = x'*y;
@@ -17,6 +14,7 @@ function [mu, x] = sympmethod(A, x, tol, N)
         if err < tol
             break;
         end
+        fprintf(fileID, '%6.0f %12.4f (%s)\n',k, mu, strjoin(cellstr(num2str(x(:))),', '));
         k = k + 1;
     end
 
