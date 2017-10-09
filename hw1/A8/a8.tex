@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
-
+\newtheorem{theorem}{Theorem}
 \usepackage{listings}
 \usepackage{xcolor}
 
@@ -38,9 +38,12 @@ by definition of A-orthogonal set, since that $$(-\cfrac{a_2}{a_1}\mathbf{v_l})^
 \textbf{b.} Show that if $\{\mathbf{v}^{(1)}, \mathbf{v}^{(2)},... , \mathbf{v}^{(n)}\}$ is a set of \textit{A}-orthogonal nonzero vectors in $\mathbb{R}$ and $\mathbf{z}^{t}\mathbf{v}^{(i)} = 0$, for each $i = 1,2,... ,n$, then $\mathbf{z} = \mathbf{0}$.
 \\
 \\
-\textit{pf.} prove by contradiction, suppose that $\mathbf{z} \neq 0$. Since that $\mathbf{z}^t\mathbf{v}^{(i)} = 0$ for every $i$, we can take transpose and get $$(\mathbf{v}^{(i)})^{t}\mathbf{z} = 0$$ by definition of A-orthogonal set, $$(\mathbf{v}^{(i)})^{t}A\mathbf{v}^{(j)} = 0$$ for every $i$, $i \neq j$. Suppose that when $i, j$ are both given, we substitude $\mathbf{z}$ for $A\mathbf{v}^{(j)}$, that is, $$\mathbf{z} = A\mathbf{v}^{(j)}$$ by definition of positive definite matrix, we multiply $(\mathbf{v}^{(j)})^{t}$ on both side, $$(\mathbf{v}^{(j)})^{t}\mathbf{z} = (\mathbf{v}^{(j)})^{t}A\mathbf{v}^{(j)} > 0$$ but we know that $(\mathbf{v}^{(i)})^{t}\mathbf{z} = 0$ for every i, which causes a contradiction. Therefore, $\mathbf{z} = 0$. $\Box$
-
-
+\textit{pf.} since that $\mathbf{z}^{t}\mathbf{v}^{(i)} = 0$ for every $i$, we can concatenate every vectors into a matrix as its \textbf{column vectors}, that is,$$\mathbf{z}^{t}\rvect{\mathbf{v}^{(1)}, \mathbf{v}^{(2)},... , \mathbf{v}^{(n)}} = \mathbf{0}_{1 \times n}$$ and then we take transpose, $$\rvect{\mathbf{v}^{(1)}, \mathbf{v}^{(2)},... , \mathbf{v}^{(n)}}^{t}\mathbf{z} = \mathbf{0}_{n \times 1}$$ we denote the n-by-n matrix $\rvect{\mathbf{v}^{(1)}, \mathbf{v}^{(2)},... , \mathbf{v}^{(n)}}^t = V_{n \times n}$, that is, $$V\mathbf{z} = \mathbf{0}$$ which is a \textbf{homogeneous linear system} of the form $A\mathbf{x} = \mathbf{0}$. we can use the following theorem:
+\begin{theorem}
+    Let $A$ be an $n \times n$ matrix, if $|A| \neq 0$, then the homogeneous linear system $A\mathbf{x} = \mathbf{0}$ has only the trivial solution, $\mathbf{x} = \mathbf{0}$.
+\end{theorem}
+since that $V_{n \times n} = \rvect{\mathbf{v}^{(1)}, \mathbf{v}^{(2)},... , \mathbf{v}^{(n)}}^{t}$ is formed by the $A$-orthogonal set, by problem \textbf{a.} we already knew that the set is linearly independent, so that $$|V_{n \times n}^t| \neq 0 $$ and also by the properties of determinent as below, $$|A| = |A^{t}|$$ therefore we get,$$| V^{t} | = | V | \neq 0 $$
+therefore by \textbf{Theorem 1}, we discovered that $V\mathbf{z} = \mathbf{0}$ has only the trivial solution, that is , $\mathbf{z} = \mathbf{0}$. $\Box$   
 
 
 
