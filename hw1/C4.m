@@ -10,21 +10,23 @@ N = 100;
 n = length(x);
 
 B1 = A;
-[r1, u1] = pm(A, x, tol, N);
+[r1, xsol]=pm(B1,ones(3,1),10^(-8),100);
 
-x1 = B1(1,1:n)'/(r1*u1(1));
-v1 = x1;
-B2 = B1-r1*u1*x1';
+u1=xsol;
+x1=B1(1,1:3)'/(r1*u1(1));
+v1=u1;
+B2=B1-r1*u1*x1';
 
-[r2, u2] = pm(B2, x, tol, N);
+[r2, xsol]=pm(B2,ones(3,1),10^(-8),100);
 
-x2=B2(2,1:n)'/(r2*u2(2));
+u2=xsol;
+x2=B2(2,1:3)'/(r2*u2(2));
 v2=(r2-r1)*u2+r1*(x1'*u2)*u1;
 B3=B2-r2*u2*x2';
 
-[r3, u3] = pm(B3, x, tol, N);
+[r3, xsol]=pm(B3,ones(3,1),10^(-8),100);
 
-v3 = (r3-r2)*u3+r2*(x2'*u3)*u2;
-
-ans = [v1 v2 v3];
-
+u3=xsol;
+v3=(r3-r2)*u3+r2*(x2'*u3)*u2;
+[r1 r2 r3]
+[A*v1-r1*v1 A*v2-r2*v2 A*v3-r3*v3]

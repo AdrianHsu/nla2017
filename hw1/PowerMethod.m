@@ -1,4 +1,4 @@
-function [xsol,lambda,flag,iter]=PowerMethod(A,x,tol,N)
+function [xsol, rv, flag, iter]=PowerMethod(A,x,tol,N)
 
 xv(:,1)=x/norm(x,Inf);
 iter=1;
