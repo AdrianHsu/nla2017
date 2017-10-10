@@ -1,117 +1,77 @@
-TOL = 1e-5;
-maxIter = 100;
+% clc;
+clear;
+
+% graph.txt DONE!
 A = [3 -1 -1 -1; -1 2 -1 0; -1 -1 3 -1; -1 0 -1 2];
-x0 = [1 1 1 1]';
-x = [1; 1; 1];
+x = [1 2 1 3]';  
+% CAUTION: x don't use 1111 since that for graph laplacian, product must = 0
 
-% A = [0 0; -1 1];
-% x0 = [1 1]';
-% x = [1];
+% A = [7 4 1; 4 4 4; 1 4 7];
+% A = [1 2; 2 1];
+% A = [-1 -2; 0 -3];
+% A = [0 0; 1 -1];
+% x = [1 1]';
 
-[eigval, eigvec] = pm(A, x0, TOL, maxIter);
+% WORKS! data from web
+% A = [2 -12; 1 -5];
+% x = [1 1]';
 
+% WORKS! problem set in Example 4, p.597
+% A = [4 -1 1; -1 3 -2; 1 -2 3];
+% x = [1 1 1]';
 
-i = 1;
+% WORKS! problem in pdf
+% A = [-4 14 0; -5 13 0; -1 0 2];
+% x = [1 1 1]';
+
+tol = 1e-8;
+N = 10000;
 n = length(A);
-m = max(abs(eigvec));
-B = zeros(n-1);
-w = zeros(n,1);
-u = zeros(n,1);
-% Step 1.
-while i<=length(eigvec)
-    if abs(eigvec(i)) == m
+% x = ones(n,1);
+
+B1 = A;
+
+r0 = 0;
+u0 = 0;
+x0 = 0;
+
+r = [];
+v = [];
+
+for i=1:n
+    [r1, u1]=pm(B1,x,10^(-8),100);
+
+% Hotelling Deflation Method
+%     x1=u1/norm(u1,2)^2;
+    
+% Weilandt Deflation Method
+    x1=B1(i,:)'/(r1*u1(i));
+
+    v1=(r1-r0)*u1 + r0*(x0'*u1)*u0;
+    r = [r r1];
+    v = [v v1];
+
+    if i==n
         break;
     end
-    i = i + 1;
+    B2=B1-r1*u1*x1'; 
+   
+    r0 = r1;
+    u0 = u1;
+    x0 = x1;
+    B1 = B2;
 end
 
-% Step 2.
-if i~=1
-    k = 1;
-    while k<=(i-1)
-        j = 1;
-        while j<=(i-1)
-            B(k,j) = A(k,j)-(eigvec(k)/eigvec(i))*A(i,j);
-            j = j + 1;
-        end
-        k = k + 1;
-    end
-end
 
-% Step 3.
-if i~=1 && i~=n 
-    k = i;
-    while k <= n-1 
-        j = 1;
-        while j <= i-1
-            B(k,j) = A(k+1,j)-(eigvec(k+1)/eigvec(i))*A(i,j);
-            B(j,k) = A(j,k+1)-(eigvec(j)/eigvec(i))*A(i,k+1);
-            j = j + 1;
-        end
-        k = k + 1;
-    end
-end
-% Step 4.
-
-if i ~= n
-    k = i;
-    while k <= n-1
-        j = i;
-        while j <= n-1
-            B(k,j) = A(k+1,j+1)-(eigvec(k+1)/eigvec(i))*A(i,j+1);
-            j = j + 1;
-        end
-        k = k + 1;
-    end
-end
-
-% Step 5.
-[mu, wPrime] = pm(B,x,TOL,maxIter);
-%     disp(mu);
-%     disp(wPrime);
-
-% Step 6.
-if(wPrime== -1)
-% 		printf("Failed");
-    u = -1;
-    return;
-end
-
-% Step 7.
-if i ~= 1
-    k = 1;
-    while k <= i-1
-        w(k) = wPrime(k);
-
-        k = k + 1;
-    end
-end
-
-% Step 8.
-w(i)=0;
-
-% Step 9.
-if i ~= n
-    k = i+1;
-    while k <= n
-        w(k) = wPrime(k-1);
-        k = k + 1;
-    end
-end
-%     disp(w);
-
-% Step 10.
-k = 1;
-while k <= n
-    j = 1;
-    sum = 0;
-    while j <= n
-        sum = sum + A(i,j)*w(j);
-        j = j + 1;
-    end
-    u(k) = (mu-eigval)*w(k)+(eigvec(k)/eigvec(i))*sum;
-    k = k + 1;
-end
-%     disp(u);
+[V, D] = eig(A);
 
 
+% v =
+% 
+%     6.0000    4.0000   -0.0000
+%     4.2857    2.0000   -0.0000
+%    -1.5000   -4.0000   -1.0000
+
+% r =
+% 
+%     6.0000    3.0000    2.0000

@@ -2,8 +2,15 @@
 clear;
 
 
-A = [3 -1 -1 -1; -1 2 -1 0; -1 -1 3 -1; -1 0 -1 2];
-x = rand(4,1); 
+% data should be .tsv file
+E = load('cube.txt'); % ChicagoRegional.txt
+A0 = GraphAdjacency(E);
+A = GraphLaplacian(A0);
+A = full(A);
+% spy(L);
+
+% A = [3 -1 -1 -1; -1 2 -1 0; -1 -1 3 -1; -1 0 -1 2];
+x = rand(length(A), 1); 
 
 tol = 1e-8;
 N = 10000;
@@ -45,14 +52,4 @@ end
 
 
 [V, D] = eig(A);
-
-
-% v =
-% 
-%     6.0000    4.0000   -0.0000
-%     4.2857    2.0000   -0.0000
-%    -1.5000   -4.0000   -1.0000
-
-% mu =
-% 
-%     6.0000    3.0000    2.0000
+% ans: mu, v
