@@ -1,10 +1,9 @@
-function [mu, x] = pmethod(A, x, tol, N)
+function [mu, x] = pm(A, x, tol, N)
 
 % Step 1.
     k = 1;
 
 % Step 2.
-
     [~, index] = max(abs(x));
 
 % Step 3.
