@@ -17,7 +17,6 @@ x = [1;-1];
 [u,mu] = wd(A,eigval,eigvec,x,TOL,maxIter);
 
 
-
 % u =
 % 
 %    -2.0000

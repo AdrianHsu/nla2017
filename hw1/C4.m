@@ -5,10 +5,15 @@ clear;
 % A = [3 -1 -1 -1; -1 2 -1 0; -1 -1 3 -1; -1 0 -1 2];
 % A = [7 4 1; 4 4 4; 1 4 7];
 % A = [1 2; 2 1];
+% x = [1 1]';
+
+% WORKS! data from web
+A = [2 -12; 1 -5];
+x = [1 1]';
 
 % WORKS! problem set in Example 4, p.597
-A = [4 -1 1; -1 3 -2; 1 -2 3];
-x = [1 1 1]';
+% A = [4 -1 1; -1 3 -2; 1 -2 3];
+% x = [1 1 1]';
 
 % WORKS! problem in pdf
 % A = [-4 14 0; -5 13 0; -1 0 2];
@@ -37,8 +42,7 @@ for i=1:n
 % Weilandt Deflation Method
     x1=B1(i,:)'/(r1*u1(i));
 
-    tmp = r0*(x0'*u1)*u0;
-    v1=(r1-r0)*u1 + tmp;
+    v1=(r1-r0)*u1 + r0*(x0'*u1)*u0;
     r = [r r1];
     v = [v v1];
 
@@ -52,6 +56,7 @@ for i=1:n
     x0 = x1;
     B1 = B2;
 end
+
 
 [V, D] = eig(A);
 
