@@ -1,4 +1,4 @@
-function [u,mu] = wd(A,eigval,eigvec,x,TOL,maxIter)
+function [u,mu, B] = wd(A,eigval,eigvec,x,TOL,maxIter)
 	i = 1;
 	n = length(A);
 	m = max(abs(eigvec));

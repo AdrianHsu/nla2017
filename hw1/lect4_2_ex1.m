@@ -1,15 +1,16 @@
 A =[-4    14     0
     -5    13     0
     -1     0     2];
+
 %
 B1=A;
 % Hotelling Method:
 %
-[xsol,rv,flag,k]=PowerMethod(B1,ones(3,1),10^(-8),100);
-r1=rv(k+1);
-u1=xsol;
-x1=u1/norm(u1,2)^2;
-B2=B1-r1*u1*x1';
+% [xsol,rv,flag,k]=PowerMethod(B1,ones(3,1),10^(-8),100);
+% r1=rv(k+1);
+% u1=xsol;
+% x1=u1/norm(u1,2)^2;
+% B2=B1-r1*u1*x1';
 
 % [xsol,rv,flag,k]=PowerMethod(B2,ones(3,1),3,10^(-8),100);
 % r2=rv(k+1);

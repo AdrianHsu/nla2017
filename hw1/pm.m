@@ -19,12 +19,8 @@ function [mu, x] = pm(A, x, tol, N)
 
         % Step 8.
         if current_max == 0
-            x = rand(length(x), 1);
-            k = 1;
-            [~, index] = max(abs(x));
-            x = x/x(index);
-            
-%             break;
+
+            break;
         end
         % Step 9.
         err = norm(x - (y/y(index)), Inf);

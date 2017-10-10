@@ -4,7 +4,7 @@
 % x0 = [1 -1 2]';
 
 
-TOL = 1e-5;
+TOL = 1e-15;
 maxIter = 100;
 
 % problem set in Example 4, p.597
@@ -17,11 +17,25 @@ x0 = [1 1 1 1]';
 
 [eigval, eigvec] = pm(A, x0, TOL, maxIter);
 
-x = [1;-1; 1];
+x = [1; 1; 1];
 
-[u,mu] = wd(A,eigval,eigvec,x,TOL,maxIter);
+[u1,r1] = wd(A,eigval,eigvec,x,TOL,maxIter);
 
-% B = [3 0 1; 0 4 0; 1 0 3];
+x1=A(2,:)'/(r1*u1(2));
+
+v1=(r1-0)*u1; %+ r0*(x0'*u1)*u0;
+r = [];
+v = [];
+r = [r r1];
+v = [v v1];
+
+
+B2=A-r1*u1*x1'; 
+[u2,r2] = wd(B2,r1,v1,x,TOL,maxIter);
+
+
+
+
 % u =
 % 
 %    -2.0000
