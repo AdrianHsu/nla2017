@@ -9,7 +9,7 @@ clear;
 
 A = [-4 14 0; -5 13 0; -1 0 2];
 tol = 1e-8;
-N = 100;
+N = 10000;
 n = length(A);
 x = ones(n,1);
 
@@ -24,8 +24,13 @@ v = [];
 
 for i=1:n
     [r1, u1]=pm(B1,x,10^(-8),100);
+
+% Hotelling Deflation Method
+%     x1=u1/norm(u1,2)^2;
     
+% Weilandt Deflation Method
     x1=B1(i,:)'/(r1*u1(i));
+
     tmp = r0*(x0'*u1)*u0;
     v1=(r1-r0)*u1 + tmp;
     r = [r r1];
