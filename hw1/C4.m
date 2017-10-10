@@ -6,12 +6,18 @@ clear;
 % A = [7 4 1; 4 4 4; 1 4 7];
 % A = [1 2; 2 1];
 
+% WORKS! problem set in Example 4, p.597
+A = [4 -1 1; -1 3 -2; 1 -2 3];
+x = [1 1 1]';
 
-A = [-4 14 0; -5 13 0; -1 0 2];
+% WORKS! problem in pdf
+% A = [-4 14 0; -5 13 0; -1 0 2];
+% x = [1 1 1]';
+
 tol = 1e-8;
 N = 10000;
 n = length(A);
-x = ones(n,1);
+% x = ones(n,1);
 
 B1 = A;
 
