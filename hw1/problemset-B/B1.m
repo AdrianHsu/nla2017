@@ -13,7 +13,8 @@ clear;
 % a = full(a);
 
 % DEFAULT:
-g = numgrid('S', 8); 
+n = 8; % size
+g = numgrid('S', n); 
 a = delsq(g); 
 a = full(a);
 % spy(a);
@@ -24,8 +25,9 @@ a = full(a);
 % 1. Symmetric RCM (built-in)
 % p = symrcm(a); % RESULT: nnzr = 221; nnzr2 = 191
 
-% 2. Nested Dissection -> dissect() NOT FOUND
-% Not built into MATLAB
+% 2. RCM / CM
+% p = rcm(a); % RESULT: nnzr = 221; nnzr2 = 191
+% p = cm(a); % RESULT: nnzr = 221; nnzr2 = 191
 
 % 3. Approximate Minimum Degree
 % p = amd(a); % RESULT: nnzr = 221; nnzr2 = 168
@@ -38,12 +40,16 @@ a = full(a);
 % p = colamd(a); % RESULT: nnzr = 221; nnzr2 = 186
 
 % 6. Level Set(Breadth First) ordering
-% p = bfs(a); % RESULT: nnzr = 221; nnzr2 = 191
+p = bfs(a); % RESULT: nnzr = 221; nnzr2 = 191
 
-% 7. RCM
-p = rcm(a);
+% 7. Nested Dissection -> dissect() NOT FOUND
+% g2 = nested(n); % RESULT: nnzr = 221; nnzr2 = 191
+% a2 = delsq(g2);
+% a2 = full(a2);
+% p2 = symrcm(a2);
+% a2 = a2(p2, p2);
 
-a2 = a(p, p);
+a2 = a(p, p); % for case 1-6
 r = chol(a);
 r2 = chol(a2); 
 nnzr = nnz(r);
