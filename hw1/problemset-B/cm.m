@@ -1,4 +1,4 @@
-function [pi] = rcm(A)
+function [pi] = cm(A)
     % almost the same as bfs, sorting process added
     [r, n, m] = getLowestDegree(A);                     % get rows and cols of A and rows of lowest degree of freedom
     i = min(r);                                         % use the lowest row index
@@ -27,10 +27,10 @@ function [pi] = rcm(A)
             end
         end
         
-        Snew = sort(Snew); % rcm only
+        Snew = sort(Snew); % cm only
         pi = [pi Snew];
+        
         S = Snew; % update level set
     end    
-    pi = fliplr(pi); % fliplr Flip array in left/right direction.
 
 end
