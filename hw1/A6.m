@@ -8,7 +8,7 @@ N = 2;
 % problem a.
 A = [3 -1 1; -1 6 2; 1 2 7];
 b = transpose([1 0 4]);
-% problem b.
+% % problem b.
 A = [10 -1 0; -1 10 -2; 0 -2 10];
 b = transpose([9 7 6]);
 % problem c.

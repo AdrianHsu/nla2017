@@ -4,14 +4,17 @@ function [x, iter] = conjgrad(A, b, tol, N)
     v = r;
     iter = 0;
 
-    fileID = fopen('conjgrad-a6-f.txt','w');
-    fprintf(fileID,'%6s %12s %s \n','k','norm', 'x');
+    fileID = fopen('conjgrad-a6-a.txt','w');
+    fprintf(fileID,'%6s %12s %s %30s\n','k','norm', 'x', 'r');
     for k = (1:N)
         t = dot(r, r) / dot(v, A*v);
         x = x + t * v;
         r1 = r - t * A*v;
+        
         no = norm(r1 - r, Inf);
-        fprintf(fileID, '%6.0f %12.4f (%s)\n',k, no, strjoin(cellstr(num2str(x(:))),', '));
+        fprintf(fileID, '%6.0f %12.4f (%s) (%s)\n',k, no, ...
+            strjoin(cellstr(num2str(x(:))), ', '), strjoin(cellstr(num2str(r(:))), ', '));
+
         if no < tol
             break;
         end
@@ -20,7 +23,9 @@ function [x, iter] = conjgrad(A, b, tol, N)
         r = r1;
         iter = iter + 1;
         
-    end
+    end    
+
+    fclose(fileID);
 end
 
 
