@@ -4,7 +4,7 @@
 % len ¡V (array) length of each column
 % a ¡V array of values
 % col ¡V corresponding array of column indices
-function [n, p, m, len, a, col] = jaggedDiagonal(a)
+function [n, p, m, len, a, col, a0] = jaggedDiagonal(a)
 
     mynnz = nnz(a);
     n = length(a);
@@ -41,7 +41,7 @@ function [n, p, m, len, a, col] = jaggedDiagonal(a)
     mymax = max(arr_nnz);
     val = zeros(mynnz, 1);
     J = zeros(mynnz, 1);
-    I = zeros(mymax, 1);
+    I = ones(mymax, 1);
     
     mylen = zeros(mymax, 1);
 
@@ -52,17 +52,20 @@ function [n, p, m, len, a, col] = jaggedDiagonal(a)
             J(c, 1) = J1(j, i);
             c = c + 1;
         end
+        
         if i ~= 1
             I(i, 1) = I(i - 1, 1) + nnz(a(:, i - 1));
-            mylen(i, 1) = nnz(a(:, i - 1));
         end
+        mylen(i, 1) = nnz(a(:, i));
     end
     
     n = length(a);
-    p0 = 1:n;
-    p = [p0; order]';
+%     p0 = 1:n;
+%     p = [p0; order]';
+    p = order';
     m = mymax;
+    a0  = a;
     a = val;
-    len = mylen;
+    len = mylen;% I;
     col = J;
 end

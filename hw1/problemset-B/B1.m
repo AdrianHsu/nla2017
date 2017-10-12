@@ -16,7 +16,7 @@ clear;
 n = 8; % size
 g = numgrid('S', n); 
 a = delsq(g); 
-a = full(a);
+% % a = full(a);
 % spy(a);
 
 
