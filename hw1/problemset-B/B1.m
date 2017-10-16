@@ -23,7 +23,7 @@ a = delsq(g);
 
 
 % 1. Symmetric RCM (built-in)
-% p = symrcm(a); % RESULT: nnzr = 221; nnzr2 = 191
+p = symrcm(a); % RESULT: nnzr = 221; nnzr2 = 191
 
 % 2. RCM / CM
 % p = rcm(a); % RESULT: nnzr = 221; nnzr2 = 191
@@ -40,7 +40,7 @@ a = delsq(g);
 % p = colamd(a); % RESULT: nnzr = 221; nnzr2 = 186
 
 % 6. Level Set(Breadth First) ordering
-p = bfs(a); % RESULT: nnzr = 221; nnzr2 = 191
+% p = bfs(a); % RESULT: nnzr = 221; nnzr2 = 191
 
 % 7. Nested Dissection -> dissect() NOT FOUND
 % g2 = nested(n); % RESULT: nnzr = 221; nnzr2 = 191

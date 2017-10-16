@@ -1,3 +1,4 @@
+# 數值線性代數 Homework\# 1 
 ## A1. example 9.3.1
 ### pmethod-a.txt
      k           mu x 

@@ -5,7 +5,7 @@ clear;
 % compare the number of non-zeros in Cholesky factors
 % using RCM and CM orderings.
 
-Problem = load('b2-dat/1138_bus.mat');
+Problem = load('b2-dat/bcsstk01.mat');
 
 a = Problem(1).Problem.A; % too weird
 % a = full(a);
@@ -22,8 +22,10 @@ nnzr = nnz(r);
 nnzr2 = nnz(r2);
 
 spy(a1);
+title('CM ordering');
 figure;
 spy(a2);
+title('RCM ordering');
 
 
 % The Cuthill-McKee algorithm is a greedy algorithm, and doesn't depend too much on the order of A on input. The reverse Cuthill-McKee algorithm is often used to produce nice orders for skyline solvers, and the skyline of the reordered matrix looks indeed quite reasonable. 

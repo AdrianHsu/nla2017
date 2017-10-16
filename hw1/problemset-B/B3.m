@@ -1,20 +1,35 @@
 % a0 = [1 0 0 2 0 3; 4 5 0 0 0 0; 0 6 7 0 0 8; ... 
 %     9 0 0 10 11 12; 0 13 0 0 14 0; 0 0 0 0 0 15];
 
-a0 = [10 -3 0 1 0 0; 0 9 6 0 -2 0; 3 0 8 7 0 0; 0 6 0 7 5 4; ...
-      0 0 0 0 9 13; 0 0 0 0  5 -1];
+% a0 = [10 -3 0 1 0 0; 0 9 6 0 -2 0; 3 0 8 7 0 0; 0 6 0 7 5 4; ...
+%       0 0 0 0 9 13; 0 0 0 0  5 -1];
 % a0 = [1 2; -2 -1];
 
-% n = 4; % size
-% g = numgrid('S', n); 
-% a0 = delsq(g); 
+% 1. 
+% A = full(gallery('tridiag',5,1,3,1));
+% B = full(gallery('tridiag',5,3,4,3));
+% I = -eye(5);
+% A(1,1) = 2;
+% A(end,end) = 2;
+% B(1,1) = 3;
+% B(end,end) = 3;
+% O = zeros(5,5);
+% a0 = [A I O O O;I B I O O;O I B I O ;O O I B I; O O O I A];
 
+% 2.
+% A = full(gallery('tridiag',5,1,-4,1));
+% I = eye(5);
+% O = zeros(5,5);
+% a0 = [A I O O O;I A I O O;O I A I O ;O O I A I; O O O I A];
+
+
+n = 6; % size
+g = numgrid('S', n); 
+a0 = delsq(g); 
 
 % a0 = [1 0 0 0 1 0 1 0; 0 1 0 1 0 0 1 0; 0 0 1 0 1 0 0 1; ...
 %      0 1 0 1 0 1 0 0; 1 0 1 0 1 0 0 0; 0 0 0 1 0 1 0 0; ...
 %      1 1 0 0 0 0 1 0; 0 0 1 0 0 0 0 1];
-
-
 
 % n ¡V number of rows in matrix
 % p ¡V (array) mapping between original row number and sorted row number
