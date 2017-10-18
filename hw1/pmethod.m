@@ -31,6 +31,6 @@ function [mu, x] = pmethod(A, x, tol, N)
         k = k + 1;
         
     end
-    fclose(fileID);
+%     fclose(fileID);
     
 end
