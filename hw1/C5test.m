@@ -1,28 +1,12 @@
 % clc;
 clear;
 
+A = [1 -1 0 0 0; -1 4 -1 -1 -1; 0 -1 2 -1 0; 0 -1 -1 3 -1; 0 -1 0 -1 2];
+x = [1 2 1 3 1]';
 % graph.txt DONE!
-A = [3 -1 -1 -1; -1 2 -1 0; -1 -1 3 -1; -1 0 -1 2];
-x = [1 2 1 3]';  
+% A = [3 -1 -1 -1; -1 2 -1 0; -1 -1 3 -1; -1 0 -1 2];
+% x = [1 2 3 4]';  
 % CAUTION: x don't use 1111 since that for graph laplacian, product must = 0
-
-% A = [7 4 1; 4 4 4; 1 4 7];
-% A = [1 2; 2 1];
-% A = [-1 -2; 0 -3];
-% A = [0 0; 1 -1];
-% x = [1 1]';
-
-% WORKS! data from web
-% A = [2 -12; 1 -5];
-% x = [1 1]';
-
-% WORKS! problem set in Example 4, p.597
-% A = [4 -1 1; -1 3 -2; 1 -2 3];
-% x = [1 1 1]';
-
-% WORKS! problem in pdf
-% A = [-4 14 0; -5 13 0; -1 0 2];
-% x = [1 1 1]';
 
 tol = 1e-8;
 N = 10000;
@@ -39,13 +23,13 @@ r = [];
 v = [];
 
 for i=1:n
-    [r1, u1]=pm(B1,x,10^(-8),100);
+    [r1, u1]=invpmethod(B1,x,10^(-8),100);
 
 % Hotelling Deflation Method
-%     x1=u1/norm(u1,2)^2;
+    x1=u1/norm(u1,2)^2;
     
 % Weilandt Deflation Method
-    x1=B1(i,:)'/(r1*u1(i));
+%     x1=B1(i,:)'/(r1*u1(i));
 
     v1=(r1-r0)*u1 + r0*(x0'*u1)*u0;
     r = [r r1];
@@ -64,7 +48,7 @@ end
 
 
 [V, D] = eig(A);
-
+% the answer is: r=eig value, v=eig vector
 
 % v =
 % 
