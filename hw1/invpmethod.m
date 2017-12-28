@@ -12,6 +12,8 @@ function [mu, x] = invpmethod(A, x, tol, N)
         % solve for (A-qI)y = x
         tmp = det(A-q*eye(n));
         if isnan(tmp) || tmp > 1e5 || tmp < 1e-5 % almost == 0
+            mu = q;
+
             return;
         end
 %         disp(det(A-q*eye(n)));

@@ -3,7 +3,6 @@ clear;
 
 A = [3 -1 -1 -1; -1 2 -1 0; -1 -1 3 -1; -1 0 -1 2];
   
-n = length(A);
 x = rand(n,1); 
 
 
@@ -22,13 +21,13 @@ v = [];
 
 for i=1:n
 
-    [mu1, u1]=pmethod(B1,x,10^(-8),100);
+    [mu1, u1]=invpmethod(B1,x,10^(-8),100);
 
 % Hotelling Deflation Method
-%     x1=u1/norm(u1,2)^2;
+    x1=u1/norm(u1,2)^2;
     
 % Weilandt Deflation Method
-    x1=B1(i,:)'/(mu1*u1(i));
+%     x1=B1(i,:)'/(mu1*u1(i));
 
     v1=(mu1-mu0)*u1 + mu0*(x0'*u1)*u0;
     mu = [mu mu1];

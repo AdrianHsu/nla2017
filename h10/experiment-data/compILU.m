@@ -1,0 +1,18 @@
+clear;
+clc;
+file = '7.txt';
+A = load(file);
+semilogy(A(1:50,1),A(1:50,2),'rx-','MarkerSize',10,'LineWidth',3);
+hold on;
+file = '8.txt';
+A = load(file);
+semilogy(A(1:50,1),A(1:50,2),'b.--','MarkerSize',30,'LineWidth',3);
+file = '9.txt';
+A = load(file);
+semilogy(A(1:50,1),A(1:50,2),'g.-','MarkerSize',30);
+% file = 'GMRESresidual.txt';
+% A = load(file);
+% semilogy(A(1:50,1),A(1:50,2),'k.-','MarkerSize',30);
+title('Comparison of Convergence Curve with precond ILU for \sigma = 1e-7','FontSize',18);
+legend('CG','BICG','BICGSTAB');
+hold off;
