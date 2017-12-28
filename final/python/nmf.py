@@ -15,8 +15,10 @@ def nmf(V,Winit,Hinit,tol,timelimit,maxiter):
  tol: tolerance for a relative stopping condition
  timelimit, maxiter: limit of time and iterations
  """
- maxiter = 2
- W = Winit; H = Hinit; initt = time();
+
+ W = Winit;
+ H = Hinit;
+ initt = time();
 
  gradW = dot(W, dot(H, H.T)) - dot(V, H.T)
  gradH = dot(dot(W.T, W), H) - dot(W.T, V)
@@ -41,7 +43,6 @@ def nmf(V,Winit,Hinit,tol,timelimit,maxiter):
   if iterH==1: tolH = 0.1 * tolH
 
   if iter % 10 == 0: stdout.write('.')
-
   print('Iter = %d Final proj-grad norm %f' % (iter, projnorm))
  return (W,H)
 
@@ -62,10 +63,10 @@ def nlssubprob(V,W,Hinit,tol,maxiter):
  alpha = 1; beta = 0.1;
  for iter in range(1, maxiter):  
   grad = dot(WtW, H) - WtV
-  #projgrad = norm(grad[logical_or(grad < 0, H >0)])
-
+  projgrad = norm(grad[logical_or(grad < 0, H >0)])
+  if projgrad < tol: break
   # search step size 
-  for inner_iter in range(1,2):
+  for inner_iter in range(1,20):
    Hn = H - alpha*grad
    Hn = where(Hn > 0, Hn, 0)
    d = Hn-H
@@ -73,17 +74,20 @@ def nlssubprob(V,W,Hinit,tol,maxiter):
    dQd = sum(dot(WtW,d) * d)
    suff_decr = 0.99*gradd + 0.5*dQd < 0;
    if inner_iter == 1:
-    decr_alpha = not suff_decr; Hp = H;
+    decr_alpha = not suff_decr;
+    Hp = H;
    if decr_alpha: 
     if suff_decr:
-     H = Hn; break;
+     H = Hn;
+     break;
     else:
      alpha = alpha * beta;
    else:
       if not suff_decr or (Hp == Hn).all():
        H = Hp; break;
       else:
-       alpha = alpha/beta; Hp = Hn;
+       alpha = alpha/beta;
+       Hp = Hn;
 
   if iter == maxiter:
    print('Max iter in nlssubprob')
