@@ -2,7 +2,7 @@ clear all
 close all
 format long
 
-kmax = 11;
+kmax = 9;
 n = 2^kmax - 1; %length(A);
 A = gen1d(n);
 A = full(A);
@@ -18,8 +18,20 @@ w = period*pi;
 b = (w^2)*sin(w*y);
 ex_y = sin(w*y);
 
+gs_run = 3;
+tol = 1;
 x = zeros(n, 1);
-gs_run = 10;
 
-result = green(A, x, b, gs_run, kmax);
-plot(y, ex_y, y, result);
+i = 0;
+while tol > 1e-5
+
+    x = gs(A, x, b, gs_run);
+    % return x
+    x = green(A, x, b, gs_run, kmax);
+    tol = max(abs(b - A*x));
+    fprintf('%f\n',tol);
+    i = i + 1;
+end
+
+fprintf('round: %d\n', i);
+plot(y, ex_y, y, x);

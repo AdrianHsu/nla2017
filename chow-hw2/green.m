@@ -1,4 +1,4 @@
-function result = green(A, x, b, gs_run, kmax)
+function x = green(A, x, b, gs_run, kmax)
     x = gs(A, x, b, gs_run);
     r1 = (b - A*x);
     Plist = cell(kmax - 1, 1);
@@ -16,7 +16,6 @@ function result = green(A, x, b, gs_run, kmax)
             break
         end
         len = (length(r1)-1)/2;
-    %     fprintf('%d\n', len);
 
         P21 = prolong(len);
         Plist{i} = P21;
@@ -39,4 +38,5 @@ function result = green(A, x, b, gs_run, kmax)
     end
 
     result = delx_list{1};
-send
+    x = result + x;
+end
