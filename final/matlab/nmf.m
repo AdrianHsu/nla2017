@@ -13,7 +13,7 @@ function [W,H] = nmf(V,Winit,Hinit,tol,timelimit,maxiter)
     gradW = W*(H*H') - V*H'; 
     gradH = (W'*W)*H - W'*V; 
     initgrad = norm([gradW; gradH'],'fro');
-
+    
     fprintf('Init gradient norm %f\n', initgrad);
     tolW = max(0.001,tol)*initgrad;
     tolH = tolW;
@@ -21,6 +21,7 @@ function [W,H] = nmf(V,Winit,Hinit,tol,timelimit,maxiter)
     for iter=1:maxiter
         % stopping condition 
         projnorm = norm([gradW(gradW<0 | W>0); gradH(gradH<0 | H>0)]); 
+        fprintf('tol*initgrad = %f\n', tol*initgrad);
         if projnorm < tol*initgrad || (cputime-initt) > timelimit
             break;
         end
@@ -41,5 +42,5 @@ function [W,H] = nmf(V,Winit,Hinit,tol,timelimit,maxiter)
         end
         fprintf('\nIter = %d Final proj-grad norm %f\n', iter, projnorm);
     end
-
+    fprintf('The ||W*H-V||_F is: %f\n', norm(W*H - V, 'fro'));
 end

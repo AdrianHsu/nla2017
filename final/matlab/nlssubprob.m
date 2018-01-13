@@ -51,4 +51,5 @@ function [H,grad,iter] = nlssubprob(V,W,Hinit,tol,maxiter)
             fprintf('Max iter in nlssubprob\n');
         end
     end
+    fprintf('iteration used: %d\n', iter);
 end

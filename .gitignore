@@ -1,3 +1,5 @@
+*/dat
+*.mtx
 *.o
 *.mexmaci64
 *.pdf

@@ -1,36 +1,45 @@
-function [y,iter,residhist] = PCGearMethod(A,b,xk,tol)
+function [y,iter,residhist] = PCGearMethod(A,b,xk,tol,sol)
     rk = b - A*xk;
-    pk = rk;
     wk = A*rk;
-    sk = A*pk;
-    wk = A*rk;
-    zk = A*sk;
-    i = 1;
-    beta = 0;
-    al = 0;
-    rk_1 = rk;
-    beta_1 = beta;
     
-    while i < 100
+    pk = 0*rk;
+    sk = 0*pk;
+    zk = 0*sk;
+    
+    i = 0;
+    al = 0;
+    
+    while max(abs(rk)) >tol
+        %i < 100i < 10000i < length(A)
         qk = A*wk;
+        rn = rk'*rk;
+        
 
-        if i == 1
+        if i == 0
             beta = 0;
-            al = (rk'*rk)/(wk'*rk);
+            al = rn/(wk'*rk);
         else
-            beta = (rk'*rk)/(rk_1'*rk_1);
-            al = (rk'*rk)/((wk'*rk)-(beta_1/al)*(rk'*rk));
+            %beta_1 = beta;
+            beta = rn/(rk_1'*rk_1);
+            
+            al = 1/(((wk'*rk)/rn) - (beta/al));
+            %rn/((wk'*rk)-((beta/al)*rn));
+            
         end
         zk = qk + beta*zk;
         sk = wk + beta*sk;
         pk = rk + beta*pk;
         xk = xk + al*pk;
+        rk_1 = rk;
         rk = rk - al*sk;
         wk = wk - al*zk;
         
-        y = xk;
-        iter = i;
-        residhist(i) = max(abs(rk));
+        
         i = i + 1;
+        iter = i;
+        %ern = (sol-xk)'*A*(sol-xk);
+        residhist(i) = max(abs(rk));
+        
     end
+    y = xk;
 end
